@@ -1,4 +1,4 @@
-package com.pharaphara.downloadManagerApi.entity;
+package com.pharaphara.uptoboxClientApi.entity;
 
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;

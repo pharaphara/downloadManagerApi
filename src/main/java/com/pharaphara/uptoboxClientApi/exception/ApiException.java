@@ -1,4 +1,4 @@
-package com.pharaphara.downloadManagerApi.exception;
+package com.pharaphara.uptoboxClientApi.exception;
 
 import org.springframework.http.HttpStatus;
 

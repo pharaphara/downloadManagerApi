@@ -1,4 +1,4 @@
-package com.pharaphara.downloadManagerApi;
+package com.pharaphara.uptoboxClientApi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

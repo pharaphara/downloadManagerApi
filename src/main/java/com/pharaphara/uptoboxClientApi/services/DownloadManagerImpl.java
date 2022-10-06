@@ -1,10 +1,10 @@
-package com.pharaphara.downloadManagerApi.services;
+package com.pharaphara.uptoboxClientApi.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pharaphara.downloadManagerApi.entity.DetailsResponseDTO;
-import com.pharaphara.downloadManagerApi.entity.Download;
-import com.pharaphara.downloadManagerApi.entity.ResponseDTO;
+import com.pharaphara.uptoboxClientApi.entity.DetailsResponseDTO;
+import com.pharaphara.uptoboxClientApi.entity.Download;
+import com.pharaphara.uptoboxClientApi.entity.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;

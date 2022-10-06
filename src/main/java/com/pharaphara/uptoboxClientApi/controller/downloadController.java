@@ -1,7 +1,7 @@
-package com.pharaphara.downloadManagerApi.controller;
+package com.pharaphara.uptoboxClientApi.controller;
 
 
-import com.pharaphara.downloadManagerApi.services.DownloadManager;
+import com.pharaphara.uptoboxClientApi.services.DownloadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.pharaphara.downloadManagerApi.services;
+package com.pharaphara.uptoboxClientApi.services;
 
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
