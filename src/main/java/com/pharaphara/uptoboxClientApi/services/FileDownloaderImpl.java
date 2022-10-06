@@ -48,7 +48,7 @@ public class FileDownloaderImpl implements FileDownloader{
                 .retrieve()
                 .bodyToFlux(DataBuffer.class);
 
-        FileOutputStream fout = null;
+        FileOutputStream fout;
         try {
             fout = new FileOutputStream(path);
         } catch (FileNotFoundException e) {
@@ -62,7 +62,7 @@ public class FileDownloaderImpl implements FileDownloader{
             String progresString = String.format("%.2f", download.getProgress() * 100.0);
             System.out.println( progresString +"% - "+download.getName() );
             try {
-                wait(5000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 return;
             }
