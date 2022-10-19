@@ -1,6 +1,7 @@
 package com.pharaphara.uptoboxClientApi.controller;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.pharaphara.uptoboxClientApi.services.DownloadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,5 +19,10 @@ public class downloadController {
     @ResponseBody
     public Mono<ResponseEntity<String>> download(@RequestBody String url){
       return downloadManager.createDownload(url);
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping(){
+        return ResponseEntity.ok("UP and Running");
     }
 }

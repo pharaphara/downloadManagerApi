@@ -2,7 +2,7 @@ package com.pharaphara.uptoboxClientApi.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pharaphara.uptoboxClientApi.entity.DetailsResponseDTO;
+import com.pharaphara.uptoboxClientApi.entity.InfoDTO;
 import com.pharaphara.uptoboxClientApi.entity.Download;
 import com.pharaphara.uptoboxClientApi.entity.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +53,12 @@ public class DownloadManagerImpl implements DownloadManager {
                 .doOnSuccess(responseEntity -> {
                     ObjectMapper mapper = new ObjectMapper();
                     try {
-                        DetailsResponseDTO detailsResponseDTO = mapper.readValue(responseEntity.getBody(), DetailsResponseDTO.class);
+                        System.out.println(responseEntity.getBody());
+                        InfoDTO infoDTO = mapper.readValue(responseEntity.getBody(), InfoDTO.class);
 
-                        String code = detailsResponseDTO.getData().getList().get(0).getFile_code();
-                        String filename = detailsResponseDTO.getData().getList().get(0).getFile_name();
-                        long size = detailsResponseDTO.getData().getList().get(0).getFile_size();
+                        String code = infoDTO.getData().getList()[0].getFile_code();
+                        String filename = infoDTO.getData().getList()[0].getFile_name();
+                        long size = infoDTO.getData().getList()[0].getFile_size();
                         webClientBuilder.build()
                                 .get()
                                 .uri(finalUrl)
@@ -67,6 +68,7 @@ public class DownloadManagerImpl implements DownloadManager {
                                 .doOnSuccess(responseEntity2 -> {
 
                                     try {
+
                                         ResponseDTO responseDTO = mapper.readValue(responseEntity2.getBody(), ResponseDTO.class);
                                         String downloadLink = (String) responseDTO.getData().get("dlLink");
                                         downloadList.add(new Download(code, filename, size, downloadLink));

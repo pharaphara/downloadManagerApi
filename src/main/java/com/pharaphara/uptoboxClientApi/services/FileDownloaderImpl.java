@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -29,6 +30,15 @@ public class FileDownloaderImpl implements FileDownloader{
     @Override
     @Async
     public void downloadFile(Download download) {
+
+        File downloadDirectory = new File(downloadFolder);
+        if(!downloadDirectory.exists()){
+            try {
+                Files.createDirectories(downloadDirectory.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 
 

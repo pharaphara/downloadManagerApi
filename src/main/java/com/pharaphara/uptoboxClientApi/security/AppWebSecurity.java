@@ -18,8 +18,8 @@ public class AppWebSecurity  {
        http
                .csrf().disable()
                .authorizeHttpRequests()
-               .anyRequest()
-               .authenticated()
+               .antMatchers( "/ping").permitAll()
+               .antMatchers("/**").authenticated() // These urls are allowed by any authenticated user
                .and()
                .httpBasic()
                ;

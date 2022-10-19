@@ -1,10 +1,10 @@
 package com.pharaphara.uptoboxClientApi.entity;
 
-public class DetailsResponseDTO {
+public class InfoDTO {
 
     private String statusCode;
     private String message;
-    private FileDetailsDTO data;
+    private InfoDataDTO data;
 
 
     public String getStatusCode() {
@@ -23,11 +23,11 @@ public class DetailsResponseDTO {
         this.message = message;
     }
 
-    public FileDetailsDTO getData() {
+    public InfoDataDTO getData() {
         return data;
     }
 
-    public void setData(FileDetailsDTO data) {
+    public void setData(InfoDataDTO data) {
         this.data = data;
     }
 }

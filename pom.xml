@@ -10,7 +10,8 @@
 	</parent>
 	<groupId>com.pharaphara</groupId>
 	<artifactId>uptoboxClientApi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
+	<packaging>war</packaging>
 	<name>uptoboxClientApi</name>
 	<description>Api for remote download</description>
 	<properties>
@@ -41,11 +42,17 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

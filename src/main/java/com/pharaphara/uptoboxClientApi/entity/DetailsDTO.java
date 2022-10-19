@@ -8,7 +8,7 @@ public class DetailsDTO {
 
     private boolean available_uts;
     private boolean need_premium;
-    private String subtitles;
+    private SubtitleDTO[] subtitleDTOS;
 
     public String getFile_code() {
         return file_code;
@@ -50,11 +50,11 @@ public class DetailsDTO {
         this.need_premium = need_premium;
     }
 
-    public String getSubtitles() {
-        return subtitles;
+    public SubtitleDTO[] getSubtitles() {
+        return subtitleDTOS;
     }
 
-    public void setSubtitles(String subtitles) {
-        this.subtitles = subtitles;
+    public void setSubtitles(SubtitleDTO[] subtitleDTOS) {
+        this.subtitleDTOS = subtitleDTOS;
     }
 }
