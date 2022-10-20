@@ -16,8 +16,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Service
 @EnableAsync
@@ -45,6 +51,7 @@ public class FileDownloaderImpl implements FileDownloader{
         String path = downloadFolder+download.getName();
 
         File f = new File(path);
+
         if(f.exists() && !f.isDirectory()) {
             download.setName(LocalDateTime.now().format(DateTimeFormatter.ofPattern("hhmmss_ddMMyy_"))+download.getName());
             path= downloadFolder+download.getName();
@@ -80,9 +87,29 @@ public class FileDownloaderImpl implements FileDownloader{
 
         try {
             fout.close();
+            Path filePath = Paths.get(path);
+            Set<PosixFilePermission> perms = Files.readAttributes(filePath, PosixFileAttributes.class).permissions();
+
+            System.out.format("Permissions before: %s%n",  PosixFilePermissions.toString(perms));
+
+            perms.add(PosixFilePermission.OWNER_WRITE);
+            perms.add(PosixFilePermission.OWNER_READ);
+            perms.add(PosixFilePermission.OWNER_EXECUTE);
+            perms.add(PosixFilePermission.GROUP_WRITE);
+            perms.add(PosixFilePermission.GROUP_READ);
+            perms.add(PosixFilePermission.GROUP_EXECUTE);
+            perms.add(PosixFilePermission.OTHERS_WRITE);
+            perms.add(PosixFilePermission.OTHERS_READ);
+            perms.add(PosixFilePermission.OTHERS_EXECUTE);
+            Files.setPosixFilePermissions(filePath, perms);
+
+            System.out.format("Permissions after:  %s%n",  PosixFilePermissions.toString(perms));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+
 
 
     }

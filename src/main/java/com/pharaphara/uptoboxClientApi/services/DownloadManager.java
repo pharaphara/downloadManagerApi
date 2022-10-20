@@ -8,5 +8,7 @@ public interface DownloadManager {
 
 
 
-    Mono<ResponseEntity<String>> createDownload(String url);
+    Mono<ResponseEntity<String>> createUptoboxDownload(String url);
+
+    Mono<ResponseEntity<String>> createRegularDownload(String url);
 }

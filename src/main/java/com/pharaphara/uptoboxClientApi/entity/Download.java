@@ -101,4 +101,15 @@ public class Download {
         this.size = size;
         this.downloadUrl = downloadUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Download{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", downloaded=" + downloaded +
+                ", downloadUrl='" + downloadUrl + '\'' +
+                '}';
+    }
 }

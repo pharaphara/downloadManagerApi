@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -36,13 +37,10 @@ public class DownloadManagerImpl implements DownloadManager {
     private final LinkedBlockingQueue<Download> downloadList = new LinkedBlockingQueue<>();
 
 
-
-
-
     @Override
-    public Mono<ResponseEntity<String>> createDownload(String url) {
+    public Mono<ResponseEntity<String>> createUptoboxDownload(String url) {
 
-        String finalUrl = waitingTokenUrl.replace("[USR_TOKEN]",userToken).replace("[FILE_CODE]",url);
+        String finalUrl = waitingTokenUrl.replace("[USR_TOKEN]", userToken).replace("[FILE_CODE]", url);
 
         return webClientBuilder.build()
                 .get()
@@ -89,15 +87,38 @@ public class DownloadManagerImpl implements DownloadManager {
                 });
     }
 
+    @Override
+    public Mono<ResponseEntity<String>> createRegularDownload(String url) {
+        Download download = new Download(null, url.substring(url.lastIndexOf("/")+1), getDownloadSize(url), url);
+
+
+        downloadList.add(download);
+
+        return Mono.just(ResponseEntity.ok(download.toString()));
+    }
+
+    private long getDownloadSize(String url) {
+
+
+        return webClientBuilder.build()
+                .get()
+                .uri(url)
+                .accept(MediaType.ALL)
+                .retrieve()
+                .toBodilessEntity()
+                .block()
+                .getHeaders().getContentLength();
+
+
+    }
+
+
     @Scheduled(fixedRate = 5, timeUnit = TimeUnit.SECONDS)
     private void scheduled() throws InterruptedException {
         fileDownloader.downloadFile(downloadList.take());
 
 
     }
-
-
-
 
 
 }

@@ -20,7 +20,7 @@ public class WebClientBuilderConf {
     @Bean
     public WebClient.Builder getWebClientBuilder() {
         return WebClient.builder()
-                .filters(exchangeFilterFunctions -> exchangeFilterFunctions.addAll(Arrays.asList(logRequest(), logresponse())))
+                //.filters(exchangeFilterFunctions -> exchangeFilterFunctions.addAll(Arrays.asList(logRequest(), logresponse())))
 
                 .exchangeStrategies(ExchangeStrategies.builder()
                         .codecs(configurer -> configurer
@@ -30,21 +30,21 @@ public class WebClientBuilderConf {
     }
 
 
-    private static ExchangeFilterFunction logRequest() {
-
-        return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
-            log.debug(" Request: {} {}", clientRequest.method(), clientRequest.url());
-            clientRequest.headers().forEach((name, values) -> values.forEach(value -> log.debug("{}={}", name, value)));
-            return Mono.just(clientRequest);
-        });
-    }
-
-    private static ExchangeFilterFunction logresponse() {
-
-        return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
-            log.debug(" Response status: {}", clientResponse.statusCode());
-            clientResponse.headers().asHttpHeaders().forEach((name, values) -> values.forEach(value -> log.debug("{}={}", name, value)));
-            return Mono.just(clientResponse);
-        });
-    }
+//    private static ExchangeFilterFunction logRequest() {
+//
+//        return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
+//            System.out.println((" Request:"+ clientRequest.method()+" "+ clientRequest.url()));
+//            clientRequest.headers().forEach((name, values) -> values.forEach(value -> System.out.println( name+"="+ value)));
+//            return Mono.just(clientRequest);
+//        });
+//    }
+//
+//    private static ExchangeFilterFunction logresponse() {
+//
+//        return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+//            System.out.println((" Response status: "+ clientResponse.statusCode()));
+//            clientResponse.headers().asHttpHeaders().forEach((name, values) -> values.forEach(value -> System.out.println(( name+"="+ value))));
+//            return Mono.just(clientResponse);
+//        });
+//    }
 }
