@@ -4,8 +4,10 @@
 
 ## Prerequisites
 
-- Go on https://uptobox.com/my_account and get your token.
-- Inside application.properties set port, name, username, download folder path, and uptobox token
+
+- Go on https://uptobox.com/my_account and get your token (Only for premium users).
+- Inside application.properties name, username, download folder path, and uptobox token
+- The API is made to run in a Tomcat server
 
 
 ## Functions:
